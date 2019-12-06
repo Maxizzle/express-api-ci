@@ -7,17 +7,11 @@
     "test": "cross-env NODE_ENV=test jest  --testTimeout=10000 --detectOpenHandles --forceExit",
     "pretest": "cross-env NODE_ENV=test npm run db:reset",
     "db:create:test": "cross-env NODE_ENV=test npx sequelize-cli db:create",
-    "db:drop:test":"cross-env NODE_ENV=test npx sequelize-cli db:drop:test",
+    "db:drop:test": "cross-env NODE_ENV=test npx sequelize-cli db:drop:test",
     "start": "node server.js",
     "dev": "nodemon server.js",
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
-    "coverage": "npm run db:dropt:test && npm run db:create:test && npm run pretest && jest --coverage && cat ./coverage/lcov.info | coveralls"
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "coveragePathIgnorePatterns": [
-      "/node_modules/"
-    ]
+    "coverage": "npm run db:drop:test && npm run db:create:test && npm run pretest && jest --coverage && cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
@@ -39,6 +33,7 @@
     "sequelize": "^5.21.2"
   },
   "devDependencies": {
+    "coveralls": "^3.0.9",
     "cross-env": "^6.0.3",
     "jest": "^24.9.0",
     "nodemon": "^2.0.1",
